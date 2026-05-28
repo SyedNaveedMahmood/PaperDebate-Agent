@@ -1,0 +1,39 @@
+project:
+  name: PaperDebate Agent
+  version: 0.1.0
+
+runtime:
+  mode: offline_stub
+  seed: 17
+  output_dir: outputs/runs
+
+search:
+  max_papers: 10
+  connectors:
+    offline_stub: true
+    arxiv: false
+    openalex: false
+    semantic_scholar: false
+    acl_anthology: false
+
+retrieval:
+  backend: lexical
+  embedding_model: sentence-transformers/all-MiniLM-L6-v2
+  vector_store: chroma
+
+agents:
+  enabled:
+    - Novelty Agent
+    - Skeptic Reviewer
+    - Feasibility Agent
+  require_evidence_ids: true
+
+scoring:
+  novelty_weight: 0.35
+  feasibility_weight: 0.30
+  reviewer_risk_weight: 0.20
+  evidence_grounding_weight: 0.15
+
+reports:
+  write_json: true
+  write_markdown: true
