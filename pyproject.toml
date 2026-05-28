@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paperdebate-agent"
+version = "0.1.0"
+description = "Local-first multi-agent literature review and research-gap discovery system."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Syed Naveed Mahmood" }
+]
+dependencies = [
+  "PyYAML>=6.0.1",
+  "rich>=13.7.0",
+  "typer>=0.12.3"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2.0",
+  "ruff>=0.5.0"
+]
+ui = [
+  "streamlit>=1.35.0"
+]
+retrieval = [
+  "sentence-transformers>=3.0.0",
+  "chromadb>=0.5.0"
+]
+connectors = [
+  "httpx>=0.27.0"
+]
+
+[project.scripts]
+paperdebate = "paperdebate_agent.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
